@@ -19,7 +19,7 @@ public class HelloController {
         BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
         String ip = br.readLine();
         
-        return "Hello this response is from IP: " + ip + " at time: " + LocalDateTime.now()
+        return "Hello this response is from IP: " + ip + " at time: " + LocalDateTime.now();
     }
     
 }
