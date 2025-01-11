@@ -29,7 +29,33 @@ public class ClientSocketHandler implements Runnable {
             InputStream backendServerToLbInputStream = backendSocket.getInputStream();
             
             
+            Thread dataFromClientToServerThread = new Thread(){
+                public void run() {
+                    try {
+                        int data;
+                        while((data = clientToLbInputStream.read()) != -1) {
+                            lbToBackendServerOutputStream.write(data);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            dataFromClientToServerThread.start();
             
+            Thread dataFromServerToClientThread = new Thread(){
+                public void run() {
+                    int data;
+                    try {
+                        while((data = backendServerToLbInputStream.read()) != -1) {
+                            lbToClientOutputStream.write(data);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            dataFromServerToClientThread.start();
             
             
             
