@@ -28,6 +28,7 @@ public class ClientSocketHandler implements Runnable {
             OutputStream lbToBackendServerOutputStream = backendSocket.getOutputStream();
             InputStream backendServerToLbInputStream = backendSocket.getInputStream();
             
+            backendSocket.close();
             
             Thread dataFromClientToServerThread = new Thread(){
                 public void run() {
@@ -60,7 +61,7 @@ public class ClientSocketHandler implements Runnable {
             
             
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
     }
 

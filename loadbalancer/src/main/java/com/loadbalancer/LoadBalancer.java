@@ -20,5 +20,6 @@ public class LoadBalancer
             Thread clientSocketHandlerThread = new Thread(clientSocketHandler);
             clientSocketHandlerThread.start();
         }
+        
     }
 }
