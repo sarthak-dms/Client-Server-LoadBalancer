@@ -18,6 +18,17 @@ public class ClientSocketHandler implements Runnable {
     @Override
     public void run() {
         try {
+            InputStream clientToLbInputStream = clientSocket.getInputStream();
+            OutputStream lbToClientOutputStream = clientSocket.getOutputStream();
+            
+            String backendHost = BackendServers.getHost();
+            System.out.println("Host selected for this request: " + backendHost);
+            
+            Socket backendSocket = new Socket(backendHost, 8080);
+            OutputStream lbToBackendServerOutputStream = backendSocket.getOutputStream();
+            InputStream backendServerToLbInputStream = backendSocket.getInputStream();
+            
+            
             
             
             
