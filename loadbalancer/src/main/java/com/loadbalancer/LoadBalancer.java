@@ -15,6 +15,10 @@ public class LoadBalancer
         while(true) {
             Socket socket = serverSocket.accept();
             System.out.println("New client connected: " + socket.toString());
+            
+            ClientSocketHandler clientSocketHandler = new ClientSocketHandler(socket);
+            Thread clientSocketHandlerThread = new Thread(clientSocketHandler);
+            clientSocketHandlerThread.start();
         }
     }
 }
